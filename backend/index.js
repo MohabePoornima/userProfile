@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const profileRoutes = require("./routes/profileRoutes");
 const { connectiondb } = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const { FRONT_URL } = require("./utils/url");
 
 
 
@@ -16,7 +17,7 @@ require("./auth/google");
 
 
 const app = express();
-app.use(cors({ origin: "https://poornima-mohabe-platformatory-labs.vercel.app", credentials: true }));
+app.use(cors({ origin: FRONT_URL, credentials: true }));
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
@@ -37,6 +38,7 @@ app.get("/profile", (req, res) => {
     res.status(401).json({ message: "Unauthorized" });
   }
 });
+
 
 const PORT = process.env.PORT || 4500;
 app.listen(PORT, async () => {

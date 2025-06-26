@@ -55,15 +55,17 @@ const updateProfile = async (req, res) => {
       { new: true }
     );
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found." });
+   try {
+      await startProfileWorkflow(updatedUser);
+    } catch (e) {
+      console.warn("Temporal workflow skipped:", e.message);
     }
 
-    await startProfileWorkflow(updatedUser);
     res.status(200).json({ message: "Profile updated", user: updatedUser });
   } catch (err) {
     console.error("Update failed:", err);
     res.status(500).json({ message: "Update failed", error: err.message });
   }
 };
+
 module.exports = { getProfile,getAllProfile, updateProfile, createProfile };
