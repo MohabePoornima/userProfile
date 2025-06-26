@@ -7,6 +7,7 @@ const { User } = require("../models/user.model");
 const createProfile = async (req, res) => {
   console.log("Enter in post request");
   
+  
   try {
     const newUser = new User(req.body);
     await newUser.save();
