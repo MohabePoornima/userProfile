@@ -42,14 +42,28 @@ const getProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const { name, email, mobileNumber, city, pincode } = req.body;
+
+    // Basic validation for mobileNumber to prevent backend crash
+    if (!mobileNumber || mobileNumber.trim() === "") {
+      return res.status(400).json({ message: "Mobile number is required." });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { name, email, mobileNumber, city, pincode },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
     await startProfileWorkflow(updatedUser);
     res.status(200).json({ message: "Profile updated", user: updatedUser });
   } catch (err) {
+    console.error("Update failed:", err);
     res.status(500).json({ message: "Update failed", error: err.message });
   }
 };
-
 module.exports = { getProfile,getAllProfile, updateProfile, createProfile };
