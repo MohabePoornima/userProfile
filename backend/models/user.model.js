@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema(
         },
         mobileNumber: { 
             type: String, 
-            required: true 
+            required: false
         },
         city: String,
         pincode: String,
