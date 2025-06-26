@@ -14,6 +14,7 @@ const authRoutes = require("./routes/authRoutes");
 dotenv.config();
 require("./auth/google");
 
+
 const app = express();
 app.use(cors({ origin: "https://poornima-mohabe-platformatory-labs.vercel.app", credentials: true }));
 app.use(express.json());
