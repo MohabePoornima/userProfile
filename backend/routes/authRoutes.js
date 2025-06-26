@@ -1,5 +1,6 @@
 const express = require("express");
 const passport = require("passport");
+const { FRONT_URL } = require("../utils/url");
 
 const authRoutes = express.Router();
 
@@ -14,7 +15,7 @@ authRoutes.get("/google/callback", passport.authenticate("google", {
   session: true,
 }), (req, res) => {
   console.log("✅ LOGGED IN USER:", req.user); 
- res.redirect(`http://localhost:5173/profile?id=${req.user._id}`);
+  res.redirect(`${FRONT_URL}/profile?id=${req.user._id}`);
 });
 
 module.exports = authRoutes;
