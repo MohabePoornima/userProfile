@@ -4,8 +4,8 @@
 
 
 // frontend url
-//  const FRONT_URL = "https://poornima-mohabe-platformatory-labs.vercel.app"
- const FRONT_URL = "http://localhost:5173"
+ const FRONT_URL = "https://poornima-mohabe-platformatory-labs.vercel.app"
+//  const FRONT_URL = "http://localhost:5173"
 
  module.exports ={
     BASE_URL,

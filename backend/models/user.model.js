@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema(
         },
         city: String,
         pincode: String,
+        profileImage : String
     },
     {
         timestamps: true,

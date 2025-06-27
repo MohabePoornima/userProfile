@@ -15,6 +15,7 @@ passport.use(
       try {
         const email = profile.emails[0].value;
         let user = await User.findOne({ email });
+        console.log(user)
 
         if (!user) {
           user = new User({
@@ -22,7 +23,8 @@ passport.use(
             email: email,
             mobileNumber: "", 
             city: "",
-            pincode: ""
+            pincode: "",
+            profileImage: profile.photos?.[0]?.value || ""
           });
           await user.save();
         }
